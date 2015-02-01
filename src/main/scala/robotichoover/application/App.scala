@@ -7,10 +7,18 @@ import robotichoover.service.{ResultsService, RoomCleaningAlgorithm}
 
 object App {
   def main(args: Array[String]) {
-    val configuration: Configuration = ConfigurationLoader(configurationInputStream(args));
-    val finalRoomStatus = RoomCleaningAlgorithm.clean(configuration)
-    val result = ResultsService.calculate(configuration, finalRoomStatus)
-    ResultsService.print(result)
+    try {
+      val configuration: Configuration = ConfigurationLoader(configurationInputStream(args));
+      val finalRoomStatus = RoomCleaningAlgorithm.clean(configuration)
+      val result = ResultsService.calculate(configuration, finalRoomStatus)
+      ResultsService.print(result)
+    } catch {
+      case e: Exception => {
+        Console.err.println(e.getMessage)
+        System.exit(1)
+      }
+    }
+
   }
 
   private def configurationInputStream(args: Array[String]): InputStream = {
