@@ -3,7 +3,7 @@ package robotichoover.service
 import org.scalatest.{Matchers, FlatSpec}
 import robotichoover.domain.{Instruction, RoomStatus}
 
-class HooverServiceTest extends FlatSpec with Matchers  {
+class HooverServiceTest extends FlatSpec with Matchers {
   "clean" should "clean the current hoover position if it's dirty" in {
     val roomStatus = RoomStatus((5, 5), (1, 2), Set((1, 2), (3, 4)))
     HooverService.clean(roomStatus) should be {
